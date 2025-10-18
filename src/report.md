@@ -94,8 +94,8 @@
 
 Необходимо проверить адреса на вхождение в диапазон адресов хостов
 
-![image01](./images/ipcalc.png)
-<br>*ipcalc*
+![image01](./images/ipcalc.png)  
+*ipcalc*
 
 - 10.0.0.1 - нет
 
@@ -111,34 +111,40 @@
 
 ## Part 2. Статическая маршрутизация между двумя машинами
 
-Конфигурация поднятых машин:
+Вывод содержания измененного файла */etc/netplan/00-installer-config.yaml* для каждой машины:
 
-![image01](./images/ws1-netplan-1.png)
-<br>*Машина ws1*
+![image01](./images/ws1-netplan-1.png)  
+*Машина ws1*
 
-![image02](./images/ws2-netplan-1.png)
-<br>*Машина ws2*
+![image02](./images/ws2-netplan-1.png)  
+*Машина ws2*
+
+![image01](./images/ws1-netplan-apply.png)  
+*ws1 `netplan apply`*
+
+![image02](./images/ws2-netplan-apply.png)  
+*ws2 `netplan apply`*
 
 ### 2.1. Добавление статического маршрута вручную
 
 Добавление статического маршрута командой `ip r add`:
 
-![image03](./images/ws1-route-1.png)
-<br>*Пинг с машины ws1*
+![image03](./images/ws1-route-1.png)  
+*Пинг с машины ws1*
 
-![image04](./images/ws2-route-1.png)
-<br>*Пинг с машины ws2*
+![image04](./images/ws2-route-1.png)  
+*Пинг с машины ws2*
 
 
 ### 2.2. Добавление статического маршрута с сохранением
 
-Добавим статический маршрут от одной машины до другой с помощью файла etc/netplan/00-installer-config.yaml, применим изменения с помошью `netplan apply` и пропингуем соединение между машинами:
+Добавим статический маршрут от одной машины до другой с помощью файла /etc/netplan/00-installer-config.yaml, применим изменения с помощью `netplan apply` и пропингуем соединение между машинами:
 
-![image07](./images/ws1-netplan-2.png)
-<br>*Машина ws1. Пинг с машины ws1*
+![image07](./images/ws1-netplan-2.png)  
+*Машина ws1. Пинг с машины ws1*
 
-![image08](./images/ws2-netplan-2.png)
-<br>*Машина ws2. Пинг с машины ws2*
+![image08](./images/ws2-netplan-2.png)  
+*Машина ws2. Пинг с машины ws2*
 
 ## Part 3. Утилита iperf3
 
@@ -154,11 +160,11 @@
 
 Измерение скорости соединения между ws1 и ws2 с помощью `iperf3`
 
-![image11](./images/ws1-iperf.png)
-<br>*Измерение скорости от ws1*
+![image11](./images/ws1-iperf.png)  
+*Измерение скорости от ws1*
 
-![image12](./images/ws2-iperf.png)
-<br>*Измерение скорости от ws2*
+![image12](./images/ws2-iperf.png)  
+*Измерение скорости от ws2*
 
 ## Part 4. Сетевой экран
 
@@ -166,28 +172,28 @@
 
 Файлы, имитирующие фаервол:
 
-![image13](./images/ws1-firewall-script.png)
-<br>*Скрипт, имитирующий фаервол, на ws1*
+![image13](./images/ws1-firewall-script.png)  
+*Скрипт, имитирующий фаервол, на ws1*
 
-![image14](./images/ws2-firewall-script.png)
-<br>*Скрипт, имитирующий фаервол, на ws2*
+![image14](./images/ws2-firewall-script.png)  
+*Скрипт, имитирующий фаервол, на ws2*
 
 Вызов скриптов:
 
-![image15](./images/ws1-firewall-call.png)
-<br>*Запуск скрипта на ws1*
+![image15](./images/ws1-firewall-call.png)  
+*Запуск скрипта на ws1*
 
-![image16](./images/ws2-firewall-call.png)
-<br>*Запуск скрипта на ws2*
+![image16](./images/ws2-firewall-call.png)  
+*Запуск скрипта на ws2*
 
-Правила выполняться сверху-вниз, следовательно, если правило запрета находиться выше оно срабатывает, а правило разрешения находящиеся ниже нет.
+Правила выполняются сверху-вниз, следовательно, если правило запрета находится выше оно срабатывает, а правило разрешения находящиеся ниже - нет.
 
 ### 4.2. Утилита nmap
 
 Вызов пинга и использование утилиты nmap:
 
-![image17](./images/ws2-ping-nmap.png)
-<br>*ping и nmap на ws2*
+![image17](./images/ws2-ping-nmap.png)  
+*ping и nmap на ws2*
 
 Объяснение разницы в стратегиях:
 
@@ -199,143 +205,143 @@
 
 ## Part 5. Статическая маршрутизация сети
 
-![part5_network](./images/network.png)
-<br>*Cхема сети*
+![part5_network](./images/network.png)  
+*Cхема сети*
 
 ### 5.1. Настройка адресов машин
 
-Содержание файла etc/netplan/00-installer-config.yaml для каждой машины:
+Содержание файла /etc/netplan/00-installer-config.yaml для каждой машины:
 
-![image18](./images/ws11-netplan1.png)
-<br>*netplan config ws11*
+![image18](./images/ws11-netplan1.png)  
+*netplan config ws11*
 
-![image19](./images/ws21-netplan-1.png)
-<br>*netplan config ws21*
+![image19](./images/ws21-netplan-1.png)  
+*netplan config ws21*
 
-![image20](./images/ws22-netplan-1.png)
-<br>*netplan config ws22*
+![image20](./images/ws22-netplan-1.png)  
+*netplan config ws22*
 
-![image21](./images/r1-netplan-1.png)
-<br>*netplan config r1*
+![image21](./images/r1-netplan-1.png)  
+*netplan config r1*
 
-![image22](./images/r2-netplan-1.png)
-<br>*netplan config r2*
+![image22](./images/r2-netplan-1.png)  
+*netplan config r2*
 
 
 Проверка IP и пинг:
 
-![image23](./images/ws11-ip-1.png)
-<br>*ip -4 a на ws11*
+![image23](./images/ws11-ip-1.png)  
+*ip -4 a на ws11*
 
-![image24](./images/ws21-ip-1.png)
-<br>*ip -4 a на ws21*
+![image24](./images/ws21-ip-1.png)  
+*ip -4 a на ws21*
 
-![image25](./images/ws22-ip-1.png)
-<br>*ip -4 a на ws22*
+![image25](./images/ws22-ip-1.png)  
+*ip -4 a на ws22*
 
-![image26](./images/r1-ip-1.png)
-<br>*ip -4 a на r1*
+![image26](./images/r1-ip-1.png)  
+*ip -4 a на r1*
 
-![image27](./images/r2-ip-1.png)
-<br>*ip -4 a на r2*
+![image27](./images/r2-ip-1.png)  
+*ip -4 a на r2*
 
-![image28](./images/ws11-ping-r1-1.png)
-<br>*ping r1 на ws11*
+![image28](./images/ws11-ping-r1-1.png)  
+*ping r1 на ws11*
 
-![image29](./images/ws21-ping-ws22-1.png)
-<br>*ping ws22 на ws21*
+![image29](./images/ws21-ping-ws22-1.png)  
+*ping ws22 на ws21*
 
 ### 5.2. Включение переадресации IP-адресов
 
 Включение переадресации IP на роутерах с помощью команды `sysctl -w net.ipv4.ip_forward=1`:
 
-![image30](./images/r1-forward-1.png)
-<br>*Переадресация на r1*
+![image30](./images/r1-forward-1.png)  
+*Переадресация на r1*
 
-![image31](./images/r2-forward-1.png)
-<br>*Переадресация на r2*
+![image31](./images/r2-forward-1.png)  
+*Переадресация на r2*
 
 Файл */etc/sysctl.conf* с добавленной строкой `net.ipv4.ip_forward = 1`:
 
-![image32](./images/r1-forward-2.png)
-<br>*Переадресация на r1*
+![image32](./images/r1-forward-2.png)  
+*Переадресация на r1*
 
-![image33](./images/r2-forward-2.png)
-<br>*Переадресация на r2*
+![image33](./images/r2-forward-2.png)  
+*Переадресация на r2*
 
 ### 5.3. Установка маршрута по умолчанию
 
 Установка шлюзов на рабочих станциях:
 
-![image34](./images/ws11-netplan-2.png)
-<br>*Шлюз на ws11. Вывод ip r*
+![image34](./images/ws11-netplan-2.png)  
+*Шлюз на ws11. Вывод ip r*
 
-![image35](./images/ws21-netplan-2.png)
-<br>*Шлюз на ws21. Вывод ip r*
+![image35](./images/ws21-netplan-2.png)  
+*Шлюз на ws21. Вывод ip r*
 
-![image36](./images/ws22-netplan-2.png)
-<br>*Шлюз на ws22. Вывод ip r*
+![image36](./images/ws22-netplan-2.png)  
+*Шлюз на ws22. Вывод ip r*
 
 Пропингуем с ws11 роутер r2 и покажем на r2, что пинг доходит с помощью команды `tcpdump -tn -i enp0s9`:
 
-![image40](./images/ws11-ping-r2-1.png)
-<br>*ping с ws11 до r2*
+![image40](./images/ws11-ping-r2-1.png)  
+*ping с ws11 до r2*
 
-![image41](./images/r2-tcpdump-1.png)
-<br>*tcpdump на r2*
+![image41](./images/r2-tcpdump-1.png)  
+*tcpdump на r2*
 
 ### 5.4. Добавление статических маршрутов
 
 Добавим в роутеры r1 и r2 статические маршруты в файле конфигураций, перезапустим сервис сети и вызовем команду `ip r`:
 
-![image42](./images/r1-netplan-2.png)
-<br>*netplan с маршрутом на r1*
+![image42](./images/r1-netplan-2.png)  
+*netplan с маршрутом на r1*
 
-![image43](./images/r2-netplan-2.png)
-<br>*netplan с маршрутом на r2*
+![image43](./images/r2-netplan-2.png)  
+*netplan с маршрутом на r2*
 
 Команда `ip r`:
 
-![image44](./images/r1-routes-1.png)
-<br>*Маршруты на r1*
+![image44](./images/r1-routes-1.png)  
+*Маршруты на r1*
 
-![image45](./images/r2-routes-1.png)
-<br>*Маршруты на r2*
+![image45](./images/r2-routes-1.png)  
+*Маршруты на r2*
 
 `ip r list` на ws11:
 
-![image46](./images/ws11-route-list.png)
-<br>*Список маршрутов на ws11 до 10.10.0.0/18 и 0.0.0.0/0*
+![image46](./images/ws11-route-list.png)  
+*Список маршрутов на ws11 до 10.10.0.0/18 и 0.0.0.0/0*
 
 Для 10.10.0.0/18 был выбран маршрут, отличный от 0.0.0.0/0, хотя он тоже подпадает под маршрут по умолчанию
 
-Это объясняется тем, что маршрутизатор выбирает маршрут с самой длинной маской, то есть наиболее точный (специфичный) вариант
+Это объясняется тем, что маршрутизатор выбирает маршрут с самой длинной маской, то есть наиболее точный (специфичный) вариант с наибольшим количеством единиц в маске.
 
 ### 5.5. Построение списка маршрутизаторов
 
-Запуcк команды дампа *tcpdump* на r1 и построение списка маршрутизаторов на пути от ws11 до ws21 при помощи утилиты traceroute:
+Запуск команды дампа *tcpdump* на r1 и построение списка маршрутизаторов на пути от ws11 до ws21 при помощи утилиты traceroute:
 
-![image47](./images/r1-tcpdump-2.png)
-<br>*Вывод tcpdump на r1 после traceroute. На скриншот не влез вызов команды и первые записи*
+![image47](./images/r1-tcpdump-2.png)  
+*Вывод tcpdump на r1 после traceroute. На скриншот не влез вызов команды и первые записи*
 
-![image48](./images/ws11-traceroute.png)
-<br>*traceroute на ws11 до ws21*
+![image48](./images/ws11-traceroute.png)  
+*traceroute на ws11 до ws21*
 
 Для определения промежуточных маршрутизаторов *traceroute* отправляет целевому узлу серию ICMP-пакетов (по умолчанию 3 пакета), с каждым шагом увеличивая значение поля TTL («время жизни») на 1. Это поле обычно указывает максимальное количество маршрутизаторов, которое может быть пройдено пакетом. Первая серия пакетов отправляется с TTL, равным 1, и поэтому первый же маршрутизатор возвращает обратно ICMP-сообщение «time exceeded in transit», указывающее на невозможность доставки данных. Traceroute фиксирует адрес маршрутизатора, а также время между отправкой пакета и получением ответа (эти сведения выводятся на монитор компьютера). Затем traceroute повторяет отправку серии пакетов, но уже с TTL, равным 2, что заставляет первый маршрутизатор уменьшить TTL пакетов на единицу и направить их ко второму маршрутизатору. Второй маршрутизатор, получив пакеты с TTL=1, так же возвращает «time exceeded in transit».
 
 Процесс повторяется до тех пор, пока пакет не достигнет целевого узла. При получении ответа от этого узла процесс трассировки считается завершённым.
 
-На оконечном хосте IP-датаграмма с TTL = 1 не отбрасывается и не вызывает ICMP-сообщения типа срок истёк, а должна быть отдана приложению. Достижение пункта назначения определяется следующим образом: отсылаемые traceroute датаграммы содержат UDP-пакет с заведомо неиспользуемым номером порта на адресуемом хосте. Номер порта будет равен 33434 + (максимальное количество транзитных участков до узла) — 1. В пункте назначения UDP-модуль, получая подобные датаграммы, возвращает ICMP-сообщения об ошибке «порт недоступен». Таким образом, чтобы узнать о завершении работы, программе traceroute достаточно обнаружить, что поступило ICMP-сообщение об ошибке этого типа
+На оконечном хосте IP-датаграмма с TTL = 1 не отбрасывается и не вызывает ICMP-сообщения типа срок истёк, а должна быть отдана приложению. Достижение пункта назначения определяется следующим образом: отсылаемые traceroute пакеты содержат UDP-пакет с неиспользуемым портом на адресуемом хосте. Номер порта будет равен 33434 + (максимальное количество транзитных участков до узла) — 1. В пункте назначения UDP-модуль, получая подобные пакеты, возвращает ICMP-сообщения об ошибке «порт недоступен». Таким образом, чтобы узнать о завершении работы, программе traceroute достаточно обнаружить, что поступило ICMP-сообщение об ошибке этого типа
 
 ### 5.6. Использование протокола ICMP при маршрутизации
 
 Запуск на r1 перехвата сетевого трафика, проходящего через enp0s8 с помощью команды `tcpdump -n -i enp0s8 icmp` и пинг с ws11 несуществующего IP `ping -c 1 10.30.0.111`:
 
-![image49](./images/r1-tcpdump-ping.png)
-<br>*tcpdump после пинга на r1*
+![image49](./images/r1-tcpdump-ping.png)  
+*tcpdump после пинга на r1*
 
-![image50](./images/ws11-ping-unexistent.png)
-<br>*Пинг несуществующего адреса на ws11*
+![image50](./images/ws11-ping-unexistent.png)  
+*Пинг несуществующего адреса на ws11*
 
 
 
@@ -343,59 +349,59 @@
 
 Содержание файла */etc/dhcp/dhcpd.conf* для r2 с конфигурацией службы **DHCP**:
 
-![image51](./images/r2-dhcpd-conf.png)
-<br>*dhcpd.conf на r2*
+![image51](./images/r2-dhcpd-conf.png)  
+*dhcpd.conf на r2*
 
-Публичный DNS-сервер google `8.8.8.8.` в *resolv.conf*
+Публичный DNS-сервер google `8.8.8.8` в *resolv.conf*
 
-![image52](./images/r2-resolv-conf.png)
-<br>*resolv.conf на r2*
+![image52](./images/r2-resolv-conf.png)  
+*resolv.conf на r2*
 
 Перезагрузка службы **DHCP** командой `systemctl restart isc-dhcp-server`:
 
-![image53](./images/r2-dhcp-restart.png)
-<br>*Перезагрузка DHCP на r2*
+![image53](./images/r2-dhcp-restart.png)  
+*Перезагрузка DHCP на r2*
 
 Перезагружаем машину ws21 при помощи `reboot` и через `ip a` покажем, что она получила адрес:
 
-![image54](./images/ws21-ip-new.png)
-<br>*Новый адрес от DHCP-сервера на машине ws21 10.20.0.2*
+![image54](./images/ws21-ip-new.png)  
+*Новый адрес от DHCP-сервера на машине ws21 10.20.0.2*
 
 Пинг с ws21 до ws22:
 
-![image55](./images/ws21-ping-ws22-1.png)
-<br>*Успешный пинг*
+![image55](./images/ws21-ping-ws22-1.png)  
+*Успешный пинг*
 
-Cодержание файла *etc/netplan/00-installer-config.yaml* для ws11 с добавленным MAC адресом:
+Cодержание файла */etc/netplan/00-installer-config.yaml* для ws11 с добавленным MAC адресом:
 
-![image56](./images/ws11-netplan-mac.png)
-<br>*Новый MAC-адрес в netplan ws11*
+![image56](./images/ws11-netplan-mac.png)  
+*Новый MAC-адрес в netplan ws11*
 
 Аналогичная настройка службы **DHCP** на r1 (с жесткой привязкой к MAC адресу):
 
-![image57](./images/r1-dhcpd-conf.png)
-<br>*Конфигурация DHCP: dhcpd.conf на r1*
+![image57](./images/r1-dhcpd-conf.png)  
+*Конфигурация DHCP: dhcpd.conf на r1*
 
-![image58](./images/r1-resolv-conf.png)
-<br>*DNS: resolv.conf на r1*
+![image58](./images/r1-resolv-conf.png)  
+*DNS: resolv.conf на r1*
 
-![image59](./images/r1-dhcp-restart.png)
-<br>*Перезагрузка DHCP на r1*
+![image59](./images/r1-dhcp-restart.png)  
+*Перезагрузка DHCP на r1*
 
 Проверка полученного IP на ws11: до перезагрузки:
 
-![image60](./images/ws11-ip-before.png)
-<br>*IP на ws11 до перезагрузки*
+![image60](./images/ws11-ip-before.png)  
+*IP на ws11 до перезагрузки*
 
 ... и после:
 
-![image61](./images/ws11-ip-after.png)
-<br>*IP на ws11 после перезагрузки*
+![image61](./images/ws11-ip-after.png)  
+*IP на ws11 после перезагрузки*
 
 Проверка пинга с ws11 до ws22:
 
-![image62](./images/ws11-ping-ws22.png)
-<br>*Успешный пинг*
+![image62](./images/ws11-ping-ws22.png)  
+*Успешный пинг*
 
 - Опции DHCP-сервера:
 
@@ -403,7 +409,7 @@ Cодержание файла *etc/netplan/00-installer-config.yaml* для ws1
 
 - option routers - шлюз по умолчанию
 
-- option domain-name-servers - DNS-сервера
+- option domain-name-servers - DNS-серверы
 
 - host - статическое сопоставление MAC-адреса и IP-адреса
 
@@ -413,38 +419,38 @@ Cодержание файла *etc/netplan/00-installer-config.yaml* для ws1
 
 Изменение конфигурации веб-сервера Apache2 на ws22 и r1:
 
-![image63](./images/ws22-r1-apache-config.png)
-<br>*Конфигурация Apache2 на ws22*
+![image63](./images/ws22-r1-apache-config.png)  
+*Конфигурация Apache2 на ws22*
 
-![image64](./images/ws22-r1-apache-config.png)
-<br>*Конфигурация Apache2 на r1*
+![image64](./images/ws22-r1-apache-config.png)  
+*Конфигурация Apache2 на r1*
 
-![image65](./images/ws22-apache-start.png)
-<br>*Запуск Apache2 на ws22*
+![image65](./images/ws22-apache-start.png)  
+*Запуск Apache2 на ws22*
 
-![image66](./images/r1-apache-start.png)
-<br>*Запуск Apache2 на r1*
+![image66](./images/r1-apache-start.png)  
+*Запуск Apache2 на r1*
 
 Имитация фаервола на r2:
 
-![image67](./images/r2-firewall-script.png)
-<br>*Фаервол на r2*
+![image67](./images/r2-firewall-script.png)  
+*Фаервол на r2*
 
 Пинг между ws22 и r1:
 
-![image69](./images/r1-ping-ws22-denied.png)
-<br>*Пинг не проходит*
+![image69](./images/r1-ping-ws22-denied.png)  
+*Пинг не проходит*
 
 Добавление разрешающего правила для ICMP-пакетов:
 
-![image70](./images/r2-firewall-script-new.png)
-<br>*Разрешающее правило в фаерволе*
+![image70](./images/r2-firewall-script-new.png)  
+*Разрешающее правило в фаерволе*
 
 
 Пинг между ws22 и r1:
 
-![image72](./images/r1-ping-ws22-success.png)
-<br>*Пинг проходит*
+![image72](./images/r1-ping-ws22-success.png)  
+*Пинг проходит*
 
 Добавление правил SNAT и DNAT:
 
@@ -452,55 +458,58 @@ SNAT - маскирование всех локальных IP из локаль
 
 DNAT - включается на 8080 порт r2 и добавляет к веб-серверу Apache, запущенному на ws22, доступ извне сети
 
-![image73](./images/r2-firewall-script-nat.png)
-<br>*Новый файл фаервола*
+![image73](./images/r2-firewall-script-nat.png)  
+*Новый файл фаервола*
 
-![image74](./images/r2-firewall-call-nat.png)
-<br>*Успешный запуск*
+![image74](./images/r2-firewall-call-nat.png)  
+*Успешный запуск*
 
 Проверка TCP-соединения для SNAT - подключение к серверу Apache с ws22 на r1:
 
-![image75](./images/ws22-telnet-r1-8080.png)
-<br>*Успешное соединение*
+![image75](./images/ws22-telnet-r1-8080.png)  
+*Успешное соединение*
 
 Проверка TCP-соединения для DNAT - подключение к серверу Apache с r1 на ws22:
 
-![image76](./images/r1-telnet-ws22-8080.png)
-<br>*Успешное соединение*
+![image76](./images/r1-telnet-ws22-8080.png)  
+*Успешное соединение*
 
 
 ## Part 8. Дополнительно. Знакомство с **SSH Tunnels**
 
 Запуск веб-сервера **Apache** на ws22 только на localhost:
-![image76](./images/ws22-apache-config.png)
-<br>*ports.conf*
+![ws22-apache-config](./images/ws22-apache-config.png)  
+*ports.conf*
 
-![image76](images/ws22-apache-start.png)
-<br>*Запуск Apache2 на ws22*
+![ws22-apache-start](./images/ws22-apache-start.png)  
+*Запуск Apache2 на ws22*
 
 Воспользоваться *Local TCP forwarding* с ws21 до ws22, чтобы получить доступ к веб-серверу на ws22 с ws21:
 
-![local_forwarding](images/ws21-local-forwarding.png)
-<br>*Local TCP forwarding*
+![local_forwarding](./images/ws21-local-forwarding.png)  
+*Local TCP forwarding*
 
 Для *Local TCP forwarding* применяется команда ssh -L local_port:destination:destination_port ssh_server_ip
 
 Проверка подключения:
 
-![telnet_ws21](images/telnet_ws21.png)
-<br>*telnet ws21*
+![telnet_ws21](./images/telnet_ws21.png)  
+*telnet ws21*
 
 Воспользоваться *Remote TCP forwarding* c ws11 до ws22, чтобы получить доступ к веб-серверу на ws22 с ws11:
 
-![remote_forwarding](images/ws11_remote_forwarding.png)
-<br>*Remote TCP forwarding*
+![remote_forwarding](./images/ws11_remote_forwarding.png)  
+*Remote TCP forwarding*
 
-![remote_forwarding](images/ws11_remote_to_ws22.png)
-<br>*Remote TCP forwarding*
+![remote_forwarding](./images/ws11_remote_to_ws22.png)  
+*Remote TCP forwarding*
 
 Для *Remote TCP forwarding* применяется команда ssh -R remote_port:destination:destination_port ssh_server_ip
 
 Проверка подключения:
 
-![telnet_ws11](images/telnet_ws11.png)
-<br>*telnet ws22*
+![telnet_ws11](./images/telnet_ws11.png)  
+*telnet ws22*
+
+Таким образом, при помощи локального и удалённого перенаправления портов (Local и Remote TCP forwarding)
+можно безопасно получать доступ к внутренним сервисам, недоступным напрямую по сети.
